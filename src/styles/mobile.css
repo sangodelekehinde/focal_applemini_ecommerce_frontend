@@ -1,0 +1,20 @@
+
+.display-menu {
+   
+    transform: translateX(500px);
+   
+    height: 100vh;
+    background-color: white ;
+    color: black;
+    width: 100%;
+ 
+    
+    
+}
+
+.open {
+    transform: translateX(0);
+    transition: transform 0.2s ease-in;
+   
+}
+
