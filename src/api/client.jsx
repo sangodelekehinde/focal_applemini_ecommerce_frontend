@@ -1,7 +1,6 @@
 // A fetch helper that automatically sends the login token to Django.
 // Use apiFetch instead of fetch for anything that needs a logged-in user.
-
-export const BASE_URL = "http://127.0.0.1:8000/api";
+import { BASE_URL } from "../config";
 
 // removes the token AND the saved cart (used by the Log out button)
 export function logout() {

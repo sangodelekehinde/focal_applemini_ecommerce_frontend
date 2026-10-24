@@ -5,7 +5,6 @@ import Explore from "./explore";
 
 function Explored({ setCartItems }) {
   const { id } = useParams();
-  const MEDIA_BASE_URL = "http://localhost:8000";
 
   // uses id to get each product
 
@@ -78,8 +77,6 @@ function Explored({ setCartItems }) {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }

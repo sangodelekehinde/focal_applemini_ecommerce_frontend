@@ -47,11 +47,31 @@ function PaymentCallback({ setCartItems }) {
 
   return (
     <div className={box}>
+      {/* Success Animation */}
+      <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full animate-[bounce_0.6s_ease-out]">
+        <svg
+          className="w-10 h-10 text-green-600"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M5 12l4 4L19 6"
+          />
+        </svg>
+      </div>
+
       <h2 className="font-bold text-2xl">Payment successful</h2>
       <p className="text-[12px] text-[grey]">
         We've emailed your receipt. If you can't see it, check your spam folder.
       </p>
-      <Link to="/account" className="bg-[black] text-white rounded-full px-6 py-2 text-[13px]">
+      <Link
+        to="/account"
+        className="bg-[black] text-white rounded-full px-6 py-2 text-[13px]"
+      >
         View my orders
       </Link>
     </div>

@@ -5,7 +5,7 @@ import Explore from "./explore";
 
 function Product_detail({ setCartItems }) {
   const { id } = useParams();
-  const MEDIA_BASE_URL = "http://localhost:8000";
+ 
 
   // uses id to get each product
 

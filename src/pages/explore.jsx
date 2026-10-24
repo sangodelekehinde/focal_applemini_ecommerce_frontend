@@ -9,8 +9,7 @@ import discover_img from "../assets/apple_discover.jpg";
 function Explore() {
   const navigate = useNavigate();
 
-  //  for images from django
-  const MEDIA_BASE_URL = "http://localhost:8000";
+
 
   // using useQuery to get data from database
   const {

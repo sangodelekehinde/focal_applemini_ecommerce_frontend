@@ -13,7 +13,7 @@ function Productlist({ setCartItems, cartItems }) {
   const navigate = useNavigate();
 
   //  for images from django
-  const MEDIA_BASE_URL = "http://localhost:8000";
+
 
   // using useQuery to get data from database
   const {

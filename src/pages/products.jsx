@@ -1,7 +1,8 @@
-// django base url api
+// Functions that get products from Django.
 
-const BASE_URL = "http://localhost:8000/api";
+import { BASE_URL } from "../config";
 
+// ALL products (used by the product list and search pages)
 export async function getProducts() {
   const res = await fetch(`${BASE_URL}/products/`);
 
@@ -12,17 +13,13 @@ export async function getProducts() {
   return res.json();
 }
 
-
-
-
-//  getProducts by id endpoint
-
-
+// ONE product, found by its id (used by the product detail pages)
 export async function getProduct(id) {
-  const res = await fetch(`http://localhost:8000/api/products/${id}/`);
-  if (!res.ok) throw new Error('Failed to fetch product');
+  const res = await fetch(`${BASE_URL}/products/${id}/`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch product");
+  }
+
   return res.json();
 }
-
-
-
