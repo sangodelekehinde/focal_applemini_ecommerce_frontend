@@ -2,11 +2,13 @@ import { getProduct } from "./products";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Explore from "./explore";
+import Spinner from "../components/Spinner";
+import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 function Product_detail({ setCartItems }) {
   const { id } = useParams();
- 
-
+  const navigate = useNavigate();
   // uses id to get each product
 
   const {
@@ -38,14 +40,20 @@ function Product_detail({ setCartItems }) {
 
   // handles loading and error
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Spinner />;
   if (error) return <p>Something went wrong: {error.message}</p>;
 
   //  display
   return (
     <div className="parent">
-      <div className=" flex justify-center h-[100vh] md:h-[60vh] mt-[70px]">
-        <div className="md:w-[60%] w-[90%] flex gap-9">
+      <button className="bg-[#151ec7] p-3 rounded-xl mt-20 ml-7 md:hidden hover:bg-black">
+        <FaArrowLeft
+          onClick={() => navigate("/")}
+          className="text-[white] text-lg"
+        />
+      </button>
+      <div className=" flex justify-center  md:h-[60vh]  mt-[70px]  mb-[60vh] md:mb-0 ">
+        <div className="md:w-[60%] w-[90%] flex gap-9  ">
           <div className="flex flex-col w-[100%]">
             <div className="explore h-[100vh] md:flex  w-[100%] gap-20 ">
               <div className="product_image  md:w-[20vw] bg-[#F5F8F7] md:h-[50vh]   p-5 rounded-lg flex justify-center items-center">
@@ -79,8 +87,8 @@ function Product_detail({ setCartItems }) {
         </div>
       </div>
 
-      <div className="explore hidden md:block">
-       <Explore/>
+      <div className="explore hidden md:block  ">
+        <Explore />
       </div>
     </div>
   );

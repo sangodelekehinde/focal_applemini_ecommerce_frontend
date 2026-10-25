@@ -5,6 +5,7 @@ import { loginUser } from "../api/auth";
 import apple_form from "../assets/apple_form_trimmed.png";
 import { useLocation } from "react-router-dom"; // add useLocation
 import PasswordInput from "../components/PasswordInput";
+import { FaArrowLeft } from "react-icons/fa6";
 
 function Login() {
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ function Login() {
 
   return (
     <div className="wrapper ">
+      <button className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-9 md:hidden hover:bg-black">
+        <FaArrowLeft onClick={() => navigate("/")} className="text-[white] text-lg" />
+      </button>
       <div className="mt-20 flex justify-center">
         <form
           onSubmit={handleSubmit}
@@ -50,6 +54,7 @@ function Login() {
               name="username"
               value={form.username}
               onChange={handleChange}
+              placeholder="username"
               required
               className="border border-[grey] p-2 rounded-full pl-5 outline-none"
             />
@@ -59,6 +64,7 @@ function Login() {
             id="password"
             name="password"
             value={form.password}
+            placeholder="password"
             onChange={handleChange}
           />
 

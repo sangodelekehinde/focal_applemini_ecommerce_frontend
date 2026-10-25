@@ -17,7 +17,9 @@ import Explored from "./pages/explored";
 import Account from "./pages/Account";
 import PaymentCallback from "./pages/PaymentCallback";
 import ForgotPassword from "./pages/ForgotPassword";
-
+import Footer from "./components/Footer";
+import Support from "./pages/Support";
+import Contact from "./pages/Contact";
 
 function App() {
   // read the saved cart once, when the app starts
@@ -46,6 +48,7 @@ function App() {
               }
             />
             <Route path="/searched/:name" element={<Searched />} />
+            <Route path="/searched/" element={<Searched />} />
             <Route
               path="/productDetail/:id"
               element={<Product_detail setCartItems={setCartItems} />}
@@ -93,7 +96,8 @@ function App() {
           <Route path="/login/" element={<Login />} />
           <Route path="/signup/" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-         
+          <Route path="/contact/" element={<Contact />} />
+          <Route path="/support/" element={<Support />} />
         </Routes>
       </BrowserRouter>
     </div>

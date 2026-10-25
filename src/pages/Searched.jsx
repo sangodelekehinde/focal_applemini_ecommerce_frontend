@@ -43,14 +43,14 @@ function Searched() {
 
   // show the matching products
   return (
-    <div className="flex justify-center mt-[70px] min-h-[100vh]">
-      <div className="md:w-[70%] w-[85%] flex gap-9 flex-col">
+    <div className="flex justify-center mt-[70px]  min-h-[100vh]">
+      <div className="md:w-[70%] w-[85%] flex gap-9  flex-col ">
         {results.map((product) => (
           <div
             key={product.id}
-            className="md:h-[55vh] flex flex-col gap-4 md:w-[100%] w-[100%]"
+            className="md:h-[20vh]  flex flex-col gap-4 md:w-[100%] w-[100%]"
           >
-            <div className="explore flex md:gap-20 gap-8 items-center">
+            <div className="explore flex md:gap-20  gap-8 items-center">
               <div className="product_image md:h-[20vh] w-[35vw] md:w-[9vw] p-5 rounded-lg flex justify-center items-center">
                 <img
                   className="w-full h-full flex justify-center object-contain size-4"

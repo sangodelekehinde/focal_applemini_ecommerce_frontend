@@ -43,7 +43,7 @@ function Explored({ setCartItems }) {
   //  display
   return (
     <div className="parent">
-      <div className=" flex justify-center h-[100vh] md:h-[60vh] mt-[70px]">
+      <div className=" flex justify-center h-[100vh] md:h-[60vh] mt-[70px] ">
         <div className="md:w-[60%] w-[90%] flex gap-9">
           <div className="flex flex-col w-[100%]">
             <div className="explore h-[100vh] md:flex  w-[100%] gap-20 ">

@@ -9,8 +9,6 @@ import discover_img from "../assets/apple_discover.jpg";
 function Explore() {
   const navigate = useNavigate();
 
-
-
   // using useQuery to get data from database
   const {
     data: product_list,
@@ -49,7 +47,12 @@ function Explore() {
                   />
                 </div>
 
-                <p className="font-montserrat">{product.name}</p>
+                <p
+                  onClick={() => navigate(`/explored/${product.id}`)}
+                  className="font-montserrat cursor-pointer hover:text-[blue]"
+                >
+                  {product.name}
+                </p>
               </div>
             </div>
           ))}
