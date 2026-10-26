@@ -22,11 +22,13 @@ import Support from "./pages/Support";
 import Contact from "./pages/Contact";
 
 function App() {
+  console.log("Home is rendering");
   // read the saved cart once, when the app starts
   const [cartItems, setCartItems] = useState(
     () => JSON.parse(localStorage.getItem("cart_count")) || [],
   );
 
+  console.log(cartItems);
   // save the cart every time it changes, from any page
   useEffect(() => {
     localStorage.setItem("cart_count", JSON.stringify(cartItems));

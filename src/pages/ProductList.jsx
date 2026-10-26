@@ -7,7 +7,6 @@ import Spinner from "../components/Spinner";
 
 import discover_img from "../assets/apple_discover.jpg";
 
-import ProductListSkeleton from "../skeletons/ProductListSkeleton";
 
 function Productlist({ setCartItems, cartItems }) {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function Productlist({ setCartItems, cartItems }) {
 
   // handles loading and error state
 
-  if (isLoading) return <ProductListSkeleton />;
+  if (isLoading) return <Spinner/>;
   if (error) return <p>Something went wrong: {error.message}</p>;
 
   // add product to cart

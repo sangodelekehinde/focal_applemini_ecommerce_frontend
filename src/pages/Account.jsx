@@ -1,7 +1,7 @@
 // Shows the logged-in user's order history, delivery date and tracking timeline.
 
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getOrders } from "../api/orders";
 import { logout } from "../api/client";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -19,6 +19,8 @@ function formatDate(dateString) {
 function Account({ setCartItems }) {
   const navigate = useNavigate();
 
+ 
+
   // get the orders from Django
   const {
     data: orders = [],
@@ -27,11 +29,9 @@ function Account({ setCartItems }) {
   } = useQuery({ queryKey: ["orders"], queryFn: getOrders });
 
   function handleLogout() {
-    logout(); // remove token + saved cart
-    setCartItems([]); // empty the cart on screen
-    
-    navigate("/");
-  }
+  logout();                  // 1. remove token + saved cart from localStorage
+  window.location.href = "/"; // 2. full page load to home
+}
 
   if (isLoading)
     return (
@@ -48,6 +48,13 @@ function Account({ setCartItems }) {
 
   return (
     <div>
+      <button
+        onClick={() => navigate("/")}
+        className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-6 md:hidden hover:bg-black"
+      >
+        <FaArrowLeft className="text-[white] text-lg" />
+      </button>
+
       <div className="font-montserrat flex justify-center mt-8 mb-16">
         <div className="w-[90%] md:w-[55%] flex flex-col gap-6">
           {/* title + logout */}
@@ -148,8 +155,6 @@ function Account({ setCartItems }) {
           ))}
         </div>
       </div>
-
-      
     </div>
   );
 }

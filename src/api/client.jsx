@@ -28,5 +28,6 @@ export async function apiFetch(path, options = {}) {
 
   const data = await res.json().catch(() => null);
   if (!res.ok) throw data || { detail: "Request failed" }; // same style as auth.jsx
+  console.log(data);
   return data;
 }
