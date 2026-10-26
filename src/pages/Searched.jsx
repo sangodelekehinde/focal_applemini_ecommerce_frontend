@@ -35,6 +35,7 @@ function Searched() {
       </p>
     );
   }
+  
 
   // open the clicked product
   function about_search(product_id) {

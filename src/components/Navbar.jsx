@@ -29,8 +29,7 @@ function Navbar({ cartCounter }) {
   const [mobilemenu, setMobileMenu] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
-  // using debounce for automatic search 
+  // using debounce for automatic search
 
   // Add these near your other useState lines
   const location = useLocation();
@@ -64,9 +63,13 @@ function Navbar({ cartCounter }) {
     const text = debouncedSearch.trim();
 
     if (text !== "") {
+      // user typed something, so show the results
       navigate(`/searched/${encodeURIComponent(text)}`, {
         replace: onSearchPage,
       });
+    } else if (onSearchPage) {
+      // box is empty AND we are on the results page, so go home
+      navigate("/", { replace: true });
     }
   }, [debouncedSearch]);
 
