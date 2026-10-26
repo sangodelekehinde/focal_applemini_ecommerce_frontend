@@ -24,7 +24,7 @@ import "../styles/mobile.css";
 function Navbar({ cartCounter }) {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const [mobilesearch, setMobileSearch] = useState(false);
+  const [mobilesearch, setMobileSearch] = useState(true);
 
   const [mobilemenu, setMobileMenu] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -173,13 +173,13 @@ function Navbar({ cartCounter }) {
               </div>
 
               <div className="cart flex items-center gap-5 ">
-                <div className="mobile_search_bar  text-[#383838] text-2xl  md:hidden  ">
+                {/* <div className="mobile_search_bar  text-[#383838] text-2xl  md:hidden  ">
                   <CiSearch
                     onClick={() => setMobileSearch(true)}
                     className="text-2xl 
                 "
                   />
-                </div>
+                </div> */}
 
                 <div
                   className="order md:flex items-center gap-2  cursor-pointer"
