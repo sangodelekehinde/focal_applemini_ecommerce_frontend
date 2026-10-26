@@ -63,7 +63,7 @@ function Cart({ cartItems, setCartItems }) {
   }, 0);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper m-3">
       <div className="flex justify-center items-center md:h-[90vh] w-[100%] mt-5 p-5">
         <div className="md:p-9  md:gap-[40px] h-[100%] md:min-w-full min-w-[86%] justify-center flex flex-col gap-8 m-2  md:flex-row  ">
           <div className="content1 md:w-[50%] rounded-lg flex flex-col gap-[20px] mb-4 ">
