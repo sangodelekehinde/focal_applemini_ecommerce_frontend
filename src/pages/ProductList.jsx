@@ -84,7 +84,7 @@ function Productlist({ setCartItems, cartItems }) {
 
   return (
     <div className="wrapper">
-      <div className="discover  flex justify-center mt-4">
+      <div className="discover  flex justify-center mt-20">
         <img
           className=" md:w-[50vw] w-[80vw] rounded-xl"
           src={discover_img}
