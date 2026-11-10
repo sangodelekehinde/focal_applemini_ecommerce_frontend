@@ -64,11 +64,18 @@ function Cart({ cartItems, setCartItems }) {
 
   return (
     <div className="wrapper m-3">
+      <button className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-6">
+        <FaArrowLeft
+          onClick={() => navigate("/")}
+          className="text-[white] text-lg"
+        />
+      </button>
+      
       <div className="flex justify-center items-center md:h-[90vh] w-[100%] mt-5 p-5">
         <div className="md:p-9  md:gap-[40px] h-[100%] md:min-w-full min-w-[86%] justify-center flex flex-col gap-8 m-2  md:flex-row  ">
           <div className="content1 md:w-[50%] rounded-lg flex flex-col gap-[20px] mb-4 ">
             <div>
-              <div className="flex justify-between md:w-[86%] items-center font-montserrat text-[12px]">
+              <div className="flex justify-between md:w-[92%] items-center font-montserrat text-[12px]">
                 <div className="flex gap-3 items-center">
                   <h2 className="font-medium text-[19px]">My Cart -</h2>
                   <p>{cartItems.length} items</p>

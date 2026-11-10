@@ -57,8 +57,8 @@ function Product_detail({ setCartItems, cartItems }) {
 
   //  display
   return (
-    <div className="parent">
-      <button className="bg-[#151ec7] p-3 rounded-xl mt-20 ml-7 md:hidden hover:bg-black">
+    <div className="parent border">
+      <button className="bg-[#151ec7] p-3 rounded-xl md:mt-10 md:ml-14 ml-5 mt-14   hover:bg-black">
         <FaArrowLeft
           onClick={() => navigate("/")}
           className="text-[white] text-lg"

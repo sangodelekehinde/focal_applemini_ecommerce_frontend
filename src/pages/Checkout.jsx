@@ -7,6 +7,8 @@ import "../styles/styles.css";
 import { FaCcVisa } from "react-icons/fa6";
 import { FaCcMastercard } from "react-icons/fa6";
 import { placeOrder } from "../api/orders";
+import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 function Checkout({ cartItems }) {
   // what the user types in the delivery form
@@ -21,7 +23,8 @@ function Checkout({ cartItems }) {
   });
 
   // updates the right field as the user types (uses the input's "name")
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   // total = price x quantity for every item
   const total = cartItems.reduce(
@@ -40,7 +43,10 @@ function Checkout({ cartItems }) {
   function handlePay(e) {
     e.preventDefault(); // stop the page from refreshing
     mutation.mutate({
-      items: cartItems.map((item) => ({ id: item.id, quantity: item.quantity })),
+      items: cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      })),
       shipping: form,
     });
   }
@@ -53,9 +59,21 @@ function Checkout({ cartItems }) {
       </p>
     );
 
+
+  const navigate = useNavigate();
+
   return (
     <form onSubmit={handlePay}>
-      <h1 className="text-2xl mt-4 ml-7 md:mt-8 md:ml-52 font-bold text-[#1212D4]">Payment</h1>
+      <button
+        onClick={() => navigate("/cart")}
+        className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-6  hover:bg-black"
+      >
+        <FaArrowLeft className="text-[white] text-lg" />
+      </button>
+
+      <h1 className="text-2xl mt-4 ml-7 md:mt-8 md:ml-52 font-bold text-[#1212D4]">
+        Payment
+      </h1>
 
       <div className="p-8 flex flex-col gap-12 md:w-[100%] md:flex-row md:justify-center">
         {/* LEFT: order summary + delivery form */}
@@ -192,8 +210,8 @@ function Checkout({ cartItems }) {
               </div>
             </div>
             <p className="text-[10px] text-[#2e2c2cb4]">
-              You'll be redirected to Paystack's secure page to complete your payment.
-              Your receipt will be emailed to you.
+              You'll be redirected to Paystack's secure page to complete your
+              payment. Your receipt will be emailed to you.
             </p>
           </div>
 
@@ -203,7 +221,9 @@ function Checkout({ cartItems }) {
               <p className="text-[grey] text-sm">{cartItems.length} items</p>
             </div>
             <div className="flex items-center gap-1">
-              <p className="text-[9px] text-[grey] bg-[#c2bdbd52] rounded-3xl p-1">NGN</p>
+              <p className="text-[9px] text-[grey] bg-[#c2bdbd52] rounded-3xl p-1">
+                NGN
+              </p>
               <p className="font-semibold">₦{total}</p>
             </div>
           </div>
@@ -211,7 +231,8 @@ function Checkout({ cartItems }) {
           {/* shows an error if Django says no */}
           {mutation.isError && (
             <p className="text-red-500 text-xs">
-              {mutation.error.detail || "Please check your details and try again."}
+              {mutation.error.detail ||
+                "Please check your details and try again."}
             </p>
           )}
 

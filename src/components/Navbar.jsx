@@ -1,23 +1,15 @@
-// import { IoGlassesOutline } from "react-icons/io5";
-import { CiHeart } from "react-icons/ci";
-import { IoBagOutline } from "react-icons/io5";
-import { LuBox } from "react-icons/lu";
-import { BsSearch } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
-import { FaRegHeart } from "react-icons/fa6";
+import { LuBox } from "react-icons/lu";
 import { CiShoppingCart } from "react-icons/ci";
 import { TbHistory } from "react-icons/tb";
-
 import { FiMenu } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Spinner from "./Spinner";
 import useDebounce from "../hooks/useDebounce";
-
-import { VscAccount } from "react-icons/vsc";
 
 import "../styles/mobile.css";
 
@@ -29,9 +21,8 @@ function Navbar({ cartCounter }) {
   const [mobilemenu, setMobileMenu] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // using debounce for automatic search
+  // ------- debounce (automatic search while typing)
 
-  // Add these near your other useState lines
   const location = useLocation();
   const debouncedSearch = useDebounce(search, 500); // updates 500ms after typing stops
 
@@ -90,67 +81,50 @@ function Navbar({ cartCounter }) {
 
   function Search(e) {
     setSearch(e.target.value);
-    // console.log("onchange result:", search);
   }
 
   function mobileMenu() {
     setMobileMenu(!mobilemenu);
   }
 
-  // search loader with keydown
-  // function handleSearch() {}
-
-  // function handleKeyDown(e) {
-  //   setLoading(true);
-
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     // console.log("Submitted text:", search);
-  //     navigate(`/searched/${search}`);
-  //     // Clear the input field after Enter is pressed
-  //     setSearch("");
-  //   }, 1000);
-  // }
-
-  const cart = JSON.parse(localStorage.getItem("cart_count"));
-
   return (
     <div className="mobile h-14  ">
       <nav className="flex font-montserrat ">
         <div className="w-[100%] flex justify-center fixed bg-white">
-          <div className="nav_wrapper flex justify-between w-[93%] p-4 ">
+          <div className="nav_wrapper flex justify-between items-center w-[93%] p-4 ">
             <div className="nav_one flex items-center gap-[40px]  ">
               <div
                 onClick={() => navigate("/")}
-                className="wbs_name font-bold "
+                className="wbs_name font-bold cursor-pointer"
               >
                 Apple mini
               </div>
 
-              {/* medium screens sizes */}
+              {/* medium screens sizes (desktop search) */}
+              <div className="hidden md:flex items-center">
+                {/* "relative" lets the icon sit inside the input */}
+                <div className="relative">
+                  <CiSearch className="absolute top-1 left-2 text-xl text-[#383838]" />
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="bg-[#F3F3F6] w-[31vw] p-1 pl-8 rounded-full outline-none text-sm "
+                    value={search}
+                    onChange={Search}
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
 
-              <div className="hidden md:block  ">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="bg-[#F3F3F6] w-[30vw] p-1 pl-7 rounded-full outline-none text-sm "
-                  value={search}
-                  onChange={Search}
-                  onKeyDown={handleKeyDown}
-                />
                 <button
                   onClick={handleSearch}
-                  className="text-[white] bg-[#151ec7] rounded-3xl p-1 w-[4vw] ml-3"
+                  className="text-[white] bg-[#151ec7] rounded-3xl p-2 text-sm ml-3"
                 >
                   search
                 </button>
               </div>
-              <div className="search_bar  text-[#383838] text-xl absolute  right-4 hidden md:block md:left-[576px]  w-6 ">
-                <CiSearch />
-              </div>
             </div>
 
-            <div className="nav_two  md:flex gap-8 text-[14px] text-[#5f5d5d]  ">
+            <div className="nav_two  md:flex items-center gap-8 text-[14px] text-[#5f5d5d]  ">
               <div
                 className="order md:flex items-center gap-2 hidden cursor-pointer"
                 onClick={() => navigate("/account")}
@@ -165,7 +139,7 @@ function Navbar({ cartCounter }) {
                     localStorage.getItem("access") ? "/account" : "/login",
                   )
                 }
-                className="fav md:flex items-center gap-2 hidden "
+                className="fav md:flex items-center gap-2 hidden cursor-pointer"
               >
                 <CgProfile className=" visible" />
 
@@ -173,65 +147,55 @@ function Navbar({ cartCounter }) {
               </div>
 
               <div className="cart flex items-center gap-5 ">
-                {/* <div className="mobile_search_bar  text-[#383838] text-2xl  md:hidden  ">
-                  <CiSearch
-                    onClick={() => setMobileSearch(true)}
-                    className="text-2xl 
-                "
-                  />
-                </div> */}
-
+                {/* history icon (mobile only) */}
                 <div
                   className="order md:flex items-center gap-2  cursor-pointer"
                   onClick={() => navigate("/account")}
                 >
-                  <TbHistory className="md:hidden text-lg" />
+                  <TbHistory className="md:hidden text-2xl" />
                 </div>
 
-                <CiShoppingCart
-                  onClick={handleCartClick}
-                  className=" relative text-2xl"
-                />
+                {/* cart icon + badge ("relative" keeps the badge stuck to the icon) */}
+                <div className="relative cursor-pointer" onClick={handleCartClick}>
+                  <CiShoppingCart className="text-2xl" />
 
-                <h1 className="bg-[red] rounded-full  ab  w-3 h-3 absolute top-5 right-[78px] md:right-[111px] md:top-[19px] flex items-center justify-center text-[9px] text-[white] font-semibold ">
-                  {cartCounter.length}
-                </h1>
+                  <h1 className="absolute bottom-3 left-4 bg-[red] rounded-full w-4 h-4 flex items-center justify-center text-[9px] text-[white] font-semibold">
+                    {cartCounter.length}
+                  </h1>
+                </div>
 
                 {/* mobile menu bar icon */}
-
                 <div>
                   <FiMenu
                     onClick={mobileMenu}
-                    className="text-[grey] text-2xl md:hidden size-8"
+                    className="text-[grey] text-2xl md:hidden cursor-pointer"
                   />
                 </div>
-              </div>
-
-              <div>
-                <button className="bg-[#0076DF] hidden text-white text-[10px] font-semibold   p-2 rounded-full">
-                  Account
-                </button>
               </div>
             </div>
           </div>
         </div>
 
         {/* show mobile search bar */}
-        <div className="mobile_search pl-6 md:hidden fixed top-14 w-[100%]  pb-2 bg-white ">
+        <div className="mobile_search pl-6 pr-6 md:hidden fixed top-14 w-[100%] pb-2 bg-white ">
           {mobilesearch && (
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Search for an item"
-                className="bg-[#F3F3F6] w-[70vw] p-1 pl-7 rounded-full outline-none text-sm "
-                value={search}
-                onChange={Search}
-                onKeyDown={handleKeyDown}
-              />
+            <div className="flex items-center gap-2">
+              {/* "relative" lets the icon sit inside the input */}
+              <div className="relative">
+                <CiSearch className="absolute top-1 left-2 text-xl text-[#383838]" />
+                <input
+                  type="text"
+                  placeholder="Search for an item"
+                  className="bg-[#F3F3F6] w-[70vw] p-1 pl-8 rounded-full outline-none text-sm "
+                  value={search}
+                  onChange={Search}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
 
               <button
                 onClick={handleSearch}
-                className="text-[white] bg-[#151ec7] rounded-3xl p-2"
+                className="text-[white] bg-[#151ec7] rounded-3xl p-2 text-sm"
               >
                 search
               </button>

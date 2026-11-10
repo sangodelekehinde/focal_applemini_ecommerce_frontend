@@ -99,7 +99,7 @@ function Productlist({ setCartItems, cartItems }) {
         />
       </div>
 
-      <div className=" flex justify-center h-[100vh] md:mt-[70px] mt-[40px]   ">
+      <div className=" flex justify-center h-[100vh] md:mt-[70px] mt-[40px]">
         <div className="  md-[80vw] flex gap-8  md:flex flex-wrap  justify-center ">
           {product_list.map((product) => (
             <div
