@@ -5,8 +5,9 @@ import Explore from "./explore";
 import Spinner from "../components/Spinner";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-function Product_detail({ setCartItems }) {
+function Product_detail({ setCartItems, cartItems }) {
   const { id } = useParams();
   const navigate = useNavigate();
   // uses id to get each product
@@ -23,6 +24,12 @@ function Product_detail({ setCartItems }) {
   //  add to cart feature from product details page using id match
 
   function addToCart() {
+    // 1. Check if this product is already in the cart
+    const existingItem = cartItems.find((item) => item.id === product.id);
+
+    // 2. Work out the new quantity (old quantity + 1, or 1 if it's new)
+    const newQuantity = existingItem ? existingItem.quantity + 1 : 1;
+
     setCartItems((prev) => {
       const exists = prev.find((item) => item.id === product.id);
 
@@ -35,6 +42,11 @@ function Product_detail({ setCartItems }) {
       }
 
       return [...prev, { ...product, quantity: 1 }];
+    });
+
+    // 4. Show the toast (product.name and product.id)
+    toast.success(`${product.name} added to cart (${newQuantity} in cart)`, {
+      id: `cart-${product.id}`,
     });
   }
 

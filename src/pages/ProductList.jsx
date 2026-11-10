@@ -6,13 +6,12 @@ import { getProducts } from "../pages/products";
 import Spinner from "../components/Spinner";
 
 import discover_img from "../assets/apple_discover.jpg";
-
+import toast from "react-hot-toast";
 
 function Productlist({ setCartItems, cartItems }) {
   const navigate = useNavigate();
 
   //  for images from django
-
 
   // using useQuery to get data from database
   const {
@@ -26,7 +25,7 @@ function Productlist({ setCartItems, cartItems }) {
 
   // handles loading and error state
 
-  if (isLoading) return <Spinner/>;
+  if (isLoading) return <Spinner />;
   if (error) return <p>Something went wrong: {error.message}</p>;
 
   // add product to cart
@@ -55,6 +54,12 @@ function Productlist({ setCartItems, cartItems }) {
   function Add_to_cart(product_id) {
     const Items = product_list.find((item) => item.id === product_id);
 
+    // 1. Check if this product is already in the cart
+    const existingItem = cartItems.find((item) => item.id === product_id);
+
+    // 2. Work out the new quantity (old quantity + 1, or 1 if it's new)
+    const newQuantity = existingItem ? existingItem.quantity + 1 : 1;
+
     // console.log(Items);
 
     setCartItems((prev) => {
@@ -75,9 +80,11 @@ function Productlist({ setCartItems, cartItems }) {
         return [...prev, cartItem];
       }
     });
+
+    toast.success(`${Items.name} added to cart (${newQuantity} in cart)`, {
+      id: `cart-${product_id}`,
+    });
   }
-
-
 
   // console.log(cartItems);
   // DISPLAY PRODUCT LIST AS UI
@@ -122,7 +129,7 @@ function Productlist({ setCartItems, cartItems }) {
                     onClick={() => Add_to_cart(product.id)}
                     className=" w-[100%] text-[13px]  font-montserrat  font-medium hover:bg-[#151ec7]  bg-[black] p-2 text-[white] rounded-md"
                   >
-                    Add to bag
+                    Add to cart
                   </button>
                 </div>
               </div>

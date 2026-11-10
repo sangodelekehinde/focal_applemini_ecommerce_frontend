@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Footer from "./components/Footer";
 import Support from "./pages/Support";
 import Contact from "./pages/Contact";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   console.log("Home is rendering");
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <div>
+      <Toaster position="top-right" />
       <BrowserRouter>
         <Routes>
           {/* pages WITH the navbar */}
@@ -53,7 +55,12 @@ function App() {
             <Route path="/searched/" element={<Searched />} />
             <Route
               path="/productDetail/:id"
-              element={<Product_detail setCartItems={setCartItems} />}
+              element={
+                <Product_detail
+                  setCartItems={setCartItems}
+                  cartItems={cartItems}
+                />
+              }
             />
             <Route
               path="/explored/:id"

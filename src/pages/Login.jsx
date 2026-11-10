@@ -34,7 +34,10 @@ function Login() {
   return (
     <div className="wrapper ">
       <button className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-9 md:hidden hover:bg-black">
-        <FaArrowLeft onClick={() => navigate("/")} className="text-[white] text-lg" />
+        <FaArrowLeft
+          onClick={() => navigate("/")}
+          className="text-[white] text-lg"
+        />
       </button>
       <div className="mt-20 flex justify-center">
         <form
@@ -68,7 +71,6 @@ function Login() {
             onChange={handleChange}
           />
 
-     
           {mutation.isError && (
             <p className="text-red-500">
               {mutation.error.detail || "Login failed"}
@@ -92,6 +94,7 @@ function Login() {
               Create account
             </span>
           </div>
+
           <p
             onClick={() => navigate("/forgot-password")}
             className="underline cursor-pointer text-[#000000ce]"

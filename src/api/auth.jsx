@@ -8,11 +8,9 @@ export async function registerUser(data) {
   });
   const result = await res.json();
   if (!res.ok) throw result; // Django's error messages
- 
-  return result;
-  
-}
 
+  return result;
+}
 
 export async function loginUser(data) {
   const res = await fetch(`${BASE_URL}/token/`, {
@@ -20,12 +18,12 @@ export async function loginUser(data) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data), // { username, password }
   });
+
   const result = await res.json();
   if (!res.ok) throw result;
-   
+
   return result; // { access, refresh }
 }
-
 
 // reset password
 
