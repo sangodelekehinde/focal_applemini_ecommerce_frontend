@@ -70,7 +70,7 @@ function Cart({ cartItems, setCartItems }) {
           className="text-[white] text-lg"
         />
       </button>
-      
+
       <div className="flex justify-center items-center md:h-[90vh] w-[100%] mt-5 p-5">
         <div className="md:p-9  md:gap-[40px] h-[100%] md:min-w-full min-w-[86%] justify-center flex flex-col gap-8 m-2  md:flex-row  ">
           <div className="content1 md:w-[50%] rounded-lg flex flex-col gap-[20px] mb-4 ">
@@ -99,16 +99,18 @@ function Cart({ cartItems, setCartItems }) {
             {cartItems.map((all_products) => (
               <div
                 key={all_products.id}
-                className="  justify-evenly flex gap-6 md:gap-14  md:p-1 items-center font-montserrat text-[11px] bg-[#f0f0f08a] md:w-[41vw] pr-3 rounded-xl"
+                className="justify-between flex gap-2 md:gap-14 md:p-1 md:pr-5 items-center font-montserrat text-[11px] bg-[#f0f0f08a] w-[100%] md:w-[41vw] pr-3 rounded-xl"
               >
                 <img
-                  className="flex justify-center object-cover md:object-contain h-full size-16 "
+                  className="flex justify-center object-cover md:object-contain h-full size-12 md:size-16"
                   src={all_products.image}
                   alt="img"
                 />
-                <p className="">{all_products.name}</p>
 
-                <div className="flex gap-3 items-center">
+                {/* fixed width on mobile so a long name wraps instead of pushing things out */}
+                <p className="w-[20vw] md:w-auto">{all_products.name}</p>
+
+                <div className="flex gap-2 md:gap-3 items-center">
                   <button
                     onClick={() => decrement(all_products.id)}
                     className="decrement border border-[#6664644b] text-xl w-7 text-[#0000009d] rounded-full"
@@ -129,9 +131,10 @@ function Cart({ cartItems, setCartItems }) {
                 {/* line total = unit price x quantity */}
                 <p>{Number(all_products.price) * all_products.quantity}</p>
 
+                {/* shrink-0 stops the icon from being squeezed away */}
                 <RiDeleteBin6Line
                   onClick={() => remove_each(all_products.id)}
-                  className="text-[red] hover:text-[grey]"
+                  className="text-[red] hover:text-[grey] shrink-0"
                 />
               </div>
             ))}
