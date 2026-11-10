@@ -50,7 +50,7 @@ function Account({ setCartItems }) {
     <div>
       <button
         onClick={() => navigate("/")}
-        className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-6 md:hidden hover:bg-black"
+        className="bg-[#151ec7] p-3 rounded-xl mt-7 ml-6  hover:bg-black"
       >
         <FaArrowLeft className="text-[white] text-lg" />
       </button>
